@@ -9,8 +9,8 @@ import websiteIcon from "../../../assets/icons/website.svg";
 export default function NFT({ data }: { data: INFT }) {
   if (data.title === "Furlin") console.log(data);
   return (
-    <div className="flex flex-col justify-start p-4 drop-shadow-lg w-86 h-86 ">
-      <div className="flex rounded-t-lg bg-white p-4 ">
+    <div className="flex flex-col justify-start p-4 w-86 h-86">
+      <div className="flex rounded-t-lg bg-white p-4 shadow-2xl	">
         <a
           href={`https://opensea.io/assets/ethereum/${data.contract?.address}/${data.tokenId}`}
         >
@@ -37,7 +37,7 @@ export default function NFT({ data }: { data: INFT }) {
           />
         </a>
       </div>
-      <div className="flex flex-col bg-blue-900 rounded-b-lg p-2">
+      <div className="flex flex-col bg-blue-900 rounded-b-lg p-2 shadow-2xl	">
         <h1 className="text-center items-center justify-center text-lg font-bold mb-2 w-64 text-clip">
           {data.title}
         </h1>

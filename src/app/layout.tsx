@@ -1,7 +1,10 @@
-import { ReactQueryProvider } from "@/components/ReactQueryProvider";
 import "./globals.css";
+import "@rainbow-me/rainbowkit/styles.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+
+import Providers from "./providers";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +21,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ReactQueryProvider>{children}</ReactQueryProvider>
+        <Providers>
+          <div className="absolute top-5 right-5">
+            <ConnectButton />
+          </div>
+          <div className="bg-white">{children}</div>
+        </Providers>
       </body>
     </html>
   );

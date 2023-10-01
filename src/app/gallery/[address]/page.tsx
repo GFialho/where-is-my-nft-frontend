@@ -6,6 +6,7 @@ import Header from "@/components/Header";
 import { useQueryGetNFTBalance } from "@/queries/getNFTBalance";
 import { useEffect, useState } from "react";
 import { INFT } from "@/utils/interfaces/nft";
+import Menu from "@/components/Menu";
 
 export default function Home({ params }: { params: { address: string } }) {
   const { data: nftData, isLoading } = useQueryGetNFTBalance({
@@ -22,12 +23,18 @@ export default function Home({ params }: { params: { address: string } }) {
 
   return (
     <div className="flex flex-col h-full items-center justify-start p-16 w-full">
+      <Menu />
       <Banner />
       <Header />
-      <div className="flex flex-col sm:flex-row justify-around w-full h-full mt-10">
-        <Filters nftData={nftData} setNfts={setNfts} />
-        <Collection nftData={nfts} />
-      </div>
+      {isLoading && <h1>Loading...</h1>}
+      {!isLoading && (
+        <div>
+          <div className="flex flex-col sm:flex-row justify-around w-full h-full mt-10">
+            <Filters nftData={nftData} setNfts={setNfts} />
+            <Collection nftData={nfts} />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -9,12 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@rainbow-me/rainbowkit": "^1.0.11",
     "@tanstack/react-query": "^4.35.3",
     "@tanstack/react-query-devtools": "^4.35.3",
     "alchemy-sdk": "^2.10.1",
     "next": "latest",
     "react": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "viem": "^1.14.0",
+    "wagmi": "^1.4.2"
   },
   "devDependencies": {
     "@tanstack/eslint-plugin-query": "^4.34.1",
