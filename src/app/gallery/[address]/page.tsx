@@ -1,14 +1,16 @@
-import Filters from "@/app/components/Filters";
-import Collection from "@/app/components/Collection";
-import Banner from "@/app/components/Banner";
+import Filters from "@/components/Filters";
+import Collection from "@/components/Collection";
+import Banner from "@/components/Banner";
+import Header from "@/components/Header";
 
-export default function Home() {
+export default function Home({ params }: { params: { address: string } }) {
   return (
     <div className="flex flex-col h-screen items-center justify-center p-16">
       <Banner />
-      <div className="flex flex-row justify-between w-full h-full bg-white">
+      <Header />
+      <div className="flex flex-row justify-around w-full h-full mt-10">
         <Filters />
-        <Collection />
+        <Collection address={params.address} />
       </div>
     </div>
   );
