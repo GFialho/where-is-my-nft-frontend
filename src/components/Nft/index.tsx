@@ -7,34 +7,49 @@ import xIcon from "../../../assets/icons/x.svg";
 import websiteIcon from "../../../assets/icons/website.svg";
 
 export default function NFT({ data }: { data: INFT }) {
-  console.log({ data });
-
+  if (data.title === "Furlin") console.log(data);
   return (
     <div className="flex flex-col justify-start p-4 drop-shadow-lg w-86 h-86 ">
       <div className="flex rounded-t-lg bg-white p-4 ">
-        <img
-          src={data.rawMetadata?.image?.replace(
-            "ipfs://",
-            "https://ipfs.io/ipfs/"
-          )}
-          height={280}
-          width={280}
-          onError={({ currentTarget }) => {
-            currentTarget.onerror = null; // prevents looping
-            currentTarget.src =
-              "https://placehold.co/280x280?text=No+Available+\nMedia";
-          }}
-          className="h-64 w-64"
-        />
+        <a
+          href={`https://opensea.io/assets/ethereum/${data.contract?.address}/${data.tokenId}`}
+        >
+          <img
+            src={
+              data.rawMetadata?.image?.replace(
+                "ipfs://",
+                "https://ipfs.io/ipfs/"
+              ) ||
+              data.rawMetadata?.image_url?.replace(
+                "ipfs://",
+                "https://ipfs.io/ipfs/"
+              ) ||
+              "https://placehold.co/280x280?text=No+Available+\nMedia"
+            }
+            height={280}
+            width={280}
+            onError={({ currentTarget }) => {
+              currentTarget.onerror = null; // prevents looping
+              currentTarget.src =
+                "https://placehold.co/280x280?text=No+Available+\nMedia";
+            }}
+            className="h-64 w-64"
+          />
+        </a>
       </div>
       <div className="flex flex-col bg-blue-900 rounded-b-lg p-2">
-        <h1 className="text-center items-center justify-center text-lg font-bold mb-2 ">
+        <h1 className="text-center items-center justify-center text-lg font-bold mb-2 w-64 text-clip">
           {data.title}
         </h1>
 
         <div className="flex justify-between text-clip">
           <h1 className="font-bold text-sm">Collection</h1>
-          <span className="text-sm">{data.contract?.name}</span>
+          <a
+            href={`https://opensea.io/assets/ethereum/${data.contract?.address}/${data.tokenId}`}
+            className="w-32 truncate  text-end"
+          >
+            <span className="text-sm w-32 truncate">{data.contract?.name}</span>
+          </a>
         </div>
 
         <div className="flex justify-between">

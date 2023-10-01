@@ -25,6 +25,7 @@ export interface INFT {
   description: string;
   timeLastUpdated: string;
   rawMetadata: {
+    image_url: any;
     name?: string;
     date?: number;
     image?: string;
