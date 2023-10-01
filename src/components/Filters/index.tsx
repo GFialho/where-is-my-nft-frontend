@@ -9,38 +9,39 @@ export default function Filters({
   setNfts: (nfts: INFT[]) => void;
 }) {
   const [collectionNames, setCollectionNames] = useState<string[]>([]);
+  const [filterNames, setFilterNames] = useState<string[]>([]);
 
   useEffect(() => {
-    if (nftData)
-      setCollectionNames(
-        nftData.ownedNfts?.map((nft) => nft.contract?.openSea?.collectionName)
-      );
+    if (nftData) {
+      const namesSet = new Set<string>();
+
+      nftData.ownedNfts?.forEach((nft) => {
+        if (nft.contract?.openSea?.collectionName)
+          namesSet.add(nft.contract?.openSea?.collectionName);
+      });
+      setCollectionNames(Array.from(namesSet));
+    }
   }, [nftData]);
 
-  const filterNfts = (newCollectionNames: string[]) => {
-    if (!newCollectionNames.length) {
-      setNfts([]);
-      return;
-    }
-
+  const filterNfts = (newFilterNames: string[]) => {
     const filteredNfts = nftData?.ownedNfts?.filter((nft) =>
-      newCollectionNames.includes(nft.contract?.openSea?.collectionName)
+      newFilterNames.includes(nft.contract?.openSea?.collectionName)
     );
     setNfts(filteredNfts);
   };
 
   const handleChange = (event: any) => {
-    const isOnCollectionNames = collectionNames.includes(event.target.value);
-    let newCollectionNames: string[];
+    const isOnFilters = filterNames.includes(event.target.value);
+    let newFilterNames: string[];
 
-    if (isOnCollectionNames)
-      newCollectionNames = collectionNames.filter(
+    if (isOnFilters)
+      newFilterNames = filterNames.filter(
         (name) => name !== event.target.value
       );
-    else newCollectionNames = [...collectionNames, event.target.value];
+    else newFilterNames = [...filterNames, event.target.value];
 
-    setCollectionNames(newCollectionNames);
-    filterNfts(newCollectionNames);
+    setFilterNames(newFilterNames);
+    filterNfts(newFilterNames);
   };
 
   return (
@@ -49,19 +50,16 @@ export default function Filters({
         <h1 className="text-center text-lg font-bold p-1">Collections</h1>
       </div>
       <div className="bg-blue-900 rounded-b-lg p-4 flex flex-col">
-        {nftData?.ownedNfts?.map((nft) => {
+        {collectionNames?.map((name) => {
           return (
             <div>
               <input
                 type="checkbox"
                 className="p-1"
-                value={nft.contract?.openSea?.collectionName}
+                value={name}
                 onChange={handleChange}
-                defaultChecked
               />
-              <label className="ml-1">
-                {nft.contract?.openSea?.collectionName}
-              </label>
+              <label className="ml-1">{name}</label>
             </div>
           );
         })}
