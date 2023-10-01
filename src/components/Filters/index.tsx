@@ -44,7 +44,7 @@ export default function Filters({
   };
 
   return (
-    <div className="flex flex-col w-auto p-4">
+    <div className="flex flex-col w-auto p-4 sm:w-96">
       <div className="rounded-t-lg bg-blue-300">
         <h1 className="text-center text-lg font-bold p-1">Collections</h1>
       </div>

@@ -21,10 +21,10 @@ export default function Home({ params }: { params: { address: string } }) {
   }, [nftData, nfts]);
 
   return (
-    <div className="flex flex-col h-screen items-center justify-start p-16 w-full">
+    <div className="flex flex-col h-full items-center justify-start p-16 w-full">
       <Banner />
       <Header />
-      <div className="flex flex-row justify-around  w-full h-full mt-10">
+      <div className="flex flex-col sm:flex-row justify-around w-full h-full mt-10">
         <Filters nftData={nftData} setNfts={setNfts} />
         <Collection nftData={nfts} />
       </div>
