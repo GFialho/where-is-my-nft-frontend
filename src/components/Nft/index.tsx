@@ -10,8 +10,8 @@ export default function NFT({ data }: { data: INFT }) {
   console.log({ data });
 
   return (
-    <div className="flex flex-col justify-center p-4 drop-shadow-lg max-w-xs">
-      <div className="flex rounded-t-lg bg-white p-4">
+    <div className="flex flex-col justify-start p-4 drop-shadow-lg w-86 h-86 ">
+      <div className="flex rounded-t-lg bg-white p-4 ">
         <img
           src={data.rawMetadata?.image?.replace(
             "ipfs://",
@@ -24,12 +24,15 @@ export default function NFT({ data }: { data: INFT }) {
             currentTarget.src =
               "https://placehold.co/280x280?text=No+Available+\nMedia";
           }}
+          className="h-64 w-64"
         />
       </div>
-      <div className="bg-blue-900 rounded-b-lg p-2">
-        <h1 className="text-center text-lg font-bold mb-2">{data.title}</h1>
+      <div className="flex flex-col bg-blue-900 rounded-b-lg p-2">
+        <h1 className="text-center items-center justify-center text-lg font-bold mb-2 ">
+          {data.title}
+        </h1>
 
-        <div className="flex justify-between">
+        <div className="flex justify-between text-clip">
           <h1 className="font-bold text-sm">Collection</h1>
           <span className="text-sm">{data.contract?.name}</span>
         </div>
