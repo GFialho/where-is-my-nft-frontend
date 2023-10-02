@@ -22,7 +22,7 @@ export default function NFT({
     <div className="flex flex-col justify-start p-4 w-86 h-86">
       <div
         className="flex rounded-t-lg bg-white p-4 shadow-2xl"
-        style={{ backgroundColor: secondaryColor || "#000000" }}
+        style={{ backgroundColor: secondaryColor || "white" }}
       >
         <a
           href={`https://opensea.io/assets/ethereum/${data.contract?.address}/${data.tokenId}`}
@@ -52,7 +52,7 @@ export default function NFT({
       </div>
       <div
         className="flex flex-col rounded-b-lg p-2 shadow-2xl"
-        style={{ backgroundColor: primaryColor || "#000000" }}
+        style={{ backgroundColor: primaryColor || "rgb(107 114 128)" }}
       >
         <h1
           className="text-center items-center justify-center text-lg font-bold mb-2 w-64 text-clip"

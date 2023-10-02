@@ -55,7 +55,7 @@ export default function Filters({
     <div className="flex flex-col w-auto p-4 sm:w-96">
       <div
         className="rounded-t-lg"
-        style={{ backgroundColor: secondaryColor || "#000000" }}
+        style={{ backgroundColor: secondaryColor || "rgb(156 163 175)" }}
       >
         <h1
           className="text-center text-lg font-bold p-1"
@@ -66,7 +66,7 @@ export default function Filters({
       </div>
       <div
         className={`rounded-b-lg p-4 flex flex-col`}
-        style={{ backgroundColor: primaryColor || "#000000" }}
+        style={{ backgroundColor: primaryColor || "rgb(107 114 128)" }}
       >
         {collectionNames?.map((name, index: number) => {
           return (
