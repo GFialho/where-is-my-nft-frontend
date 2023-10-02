@@ -25,7 +25,7 @@ export default function RootLayout({
           <div className="absolute top-5 right-5">
             <ConnectButton />
           </div>
-          <div className="bg-white">{children}</div>
+          {children}
         </Providers>
       </body>
     </html>

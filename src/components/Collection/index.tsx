@@ -9,8 +9,8 @@ export default function Collection({ nftData }: { nftData: INFT[] }) {
   // console.log({ nftData });
 
   return (
-    <div className="flex flex-col justify-start items-start self-start w-full">
-      <div className="flex flex-wrap w-full h-full justify-start">
+    <div className="flex flex-col justify-start w-full h-full">
+      <div className="flex flex-wrap justify-start sm:w-[1040px]">
         {nftData?.map((data: INFT) => {
           return <NFT data={data} />;
         })}
