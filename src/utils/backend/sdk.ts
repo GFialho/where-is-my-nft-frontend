@@ -13,7 +13,7 @@ class Sdk {
       method: props.method,
       url: `${this.baseUrl}/${props.path}`,
       headers: {
-        Signature: props.signature,
+        Authorization: props.signature,
         "Content-Type": "application/json",
       },
       ...props,
