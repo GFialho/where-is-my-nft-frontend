@@ -52,7 +52,7 @@ export default function NFT({
       </div>
       <div
         className="flex flex-col rounded-b-lg p-2 shadow-2xl"
-        style={{ backgroundColor: primaryColor || "rgb(107 114 128)" }}
+        style={{ backgroundColor: primaryColor || "rgb(30 58 138)" }}
       >
         <h1
           className="text-center items-center justify-center text-lg font-bold mb-2 w-64 text-clip"
