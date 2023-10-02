@@ -36,6 +36,7 @@ export default function Home({ params }: { params: { address: string } }) {
           nickname={accountData?.user?.nickname}
           description={accountData?.user?.description}
           address={params.address}
+          totalCount={nftData?.totalCount}
         />
       )}
 

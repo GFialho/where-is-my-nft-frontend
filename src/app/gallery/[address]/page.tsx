@@ -9,11 +9,19 @@ import { INFT } from "@/utils/interfaces/nft";
 import Menu from "@/components/Menu";
 import { Spinner } from "@/components/Spinner";
 import { useQueryGetAccount } from "@/queries/getAccount";
+import Button from "@/components/Button";
 
 export default function Home({ params }: { params: { address: string } }) {
-  const { data: nftData, isLoading } = useQueryGetNFTBalance({
+  const {
+    data: nftData,
+    isLoading,
+    isFetchingNextPage,
+    fetchNextPage,
+    hasNextPage,
+  } = useQueryGetNFTBalance({
     address: params.address,
   });
+  const [data, setData] = useState<any>([]);
 
   const { data: accountData, isLoading: isGetAccountLoading } =
     useQueryGetAccount(params.address as string, {
@@ -22,11 +30,28 @@ export default function Home({ params }: { params: { address: string } }) {
 
   const [nfts, setNfts] = useState<INFT[]>([]);
 
+  console.log({ data });
+
   useEffect(() => {
-    if (nftData && !nfts?.length) {
-      setNfts(nftData.ownedNfts);
+    if (!nftData) return;
+
+    const allPagesData: { ownedNfts: INFT[]; totalCount: number } = {
+      ownedNfts: [],
+      totalCount: nftData?.pages?.[0]?.totalCount,
+    };
+
+    nftData?.pages?.forEach((page: any) => {
+      allPagesData.ownedNfts.push(...page.ownedNfts);
+    });
+
+    setData(allPagesData);
+  }, [nftData]);
+
+  useEffect(() => {
+    if (data && !nfts?.length) {
+      setNfts(data.ownedNfts);
     }
-  }, [nftData, nfts]);
+  }, [data, nfts]);
 
   return (
     <div className="flex flex-col h-full items-center justify-start p-16 w-full">
@@ -37,6 +62,7 @@ export default function Home({ params }: { params: { address: string } }) {
           nickname={accountData?.user?.nickname}
           description={accountData?.user?.description}
           address={params.address}
+          totalCount={data?.totalCount}
         />
       )}
 
@@ -44,24 +70,37 @@ export default function Home({ params }: { params: { address: string } }) {
       {!isLoading && (
         <div>
           <div>
-            {nftData && (
-              <div className="flex flex-col sm:flex-row justify-around  mt-10">
-                <Filters
-                  nftData={nftData}
-                  setNfts={setNfts}
-                  primaryColor={accountData?.user?.primaryColor}
-                  secondaryColor={accountData?.user?.secondaryColor}
-                  textColor={accountData?.user?.textColor}
-                />
-                <Collection
-                  nftData={nfts}
-                  primaryColor={accountData?.user?.primaryColor}
-                  secondaryColor={accountData?.user?.secondaryColor}
-                  textColor={accountData?.user?.textColor}
-                />
+            {data && (
+              <div className="flex flex-col justify-center">
+                <div className="flex flex-col sm:flex-row justify-around  mt-10">
+                  <Filters
+                    nftData={data}
+                    setNfts={setNfts}
+                    primaryColor={accountData?.user?.primaryColor}
+                    secondaryColor={accountData?.user?.secondaryColor}
+                    textColor={accountData?.user?.textColor}
+                  />
+                  <Collection
+                    nftData={nfts}
+                    primaryColor={accountData?.user?.primaryColor}
+                    secondaryColor={accountData?.user?.secondaryColor}
+                    textColor={accountData?.user?.textColor}
+                  />
+                </div>
+                {!data?.pageKey && (
+                  <div className="flex self-center mt-6">
+                    <Button
+                      onClick={() => fetchNextPage()}
+                      isLoading={isFetchingNextPage}
+                      disabled={!hasNextPage || isFetchingNextPage}
+                    >
+                      Load More
+                    </Button>
+                  </div>
+                )}
               </div>
             )}
-            {!nftData && <span>No NFTs found.</span>}
+            {!data && <span>No NFTs found.</span>}
           </div>
         </div>
       )}
