@@ -1,6 +1,6 @@
 # Gabriel Fialho NFT Gallery Challenge (Frontend)
 
-Frontend system of the nft gallery, a website where people can see NFTs from different users and customize their own collection. The technologies used are:
+Frontend system of the nft gallery, a website where people can see NFTs from different users and customize their own collection: https://main.d2ifhmggvcy4d7.amplifyapp.com/gallery/0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d. The technologies used are:
 
 - Typescript as language
 - NextJs 13
@@ -9,8 +9,6 @@ Frontend system of the nft gallery, a website where people can see NFTs from dif
 - Alchemy for web3 data
 - React Query for data fetching
 - AWS Amplify for hosting
-
-This system is splitted into modules, each one with a specific function.
 
 ## Pages
 
