@@ -43,14 +43,14 @@ export default function Home({ params }: { params: { address: string } }) {
       {isLoading && <Spinner />}
       {!isLoading && (
         <div>
-          <div className="flex flex-col sm:flex-row justify-around  mt-10">
-            {nftData?.length && (
-              <div>
+          <div>
+            {nftData && (
+              <div className="flex flex-col sm:flex-row justify-around  mt-10">
                 <Filters nftData={nftData} setNfts={setNfts} />
                 <Collection nftData={nfts} />
               </div>
             )}
-            {!nftData?.length && <span>No NFTs found.</span>}
+            {!nftData && <span>No NFTs found.</span>}
           </div>
         </div>
       )}

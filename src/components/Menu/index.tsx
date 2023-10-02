@@ -23,14 +23,22 @@ export default function Menu() {
             onChange={(event) => setSearchText(event.target.value)}
             onKeyDown={(event) => {
               if (event.key === "Enter") {
-                router.push(searchText);
+                router.push(
+                  searchText.includes("gallery")
+                    ? searchText
+                    : `gallery/${searchText}`
+                );
               }
             }}
             className="w-full"
           ></input>
           <button
             onClick={() => {
-              router.push(searchText);
+              router.push(
+                searchText.includes("gallery")
+                  ? searchText
+                  : `gallery/${searchText}`
+              );
             }}
           >
             <Image src={searchIcon} height={24} width={24} alt="Search Icon" />
