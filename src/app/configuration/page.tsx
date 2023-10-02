@@ -8,7 +8,7 @@ import { useMutationUpdateAccount } from "@/mutations/updateAccount";
 import { useQueryGetAccount } from "@/queries/getAccount";
 import * as Form from "@radix-ui/react-form";
 import { useRouter } from "next/navigation";
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
 import { useAccount, useSignMessage } from "wagmi";
 
 export default function Config() {
@@ -27,6 +27,7 @@ export default function Config() {
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     const data = Object.fromEntries(new FormData(event.currentTarget));
+
     const signature = await signMessageAsync({ message: JSON.stringify(data) });
     await mutateAsync({ address, data, signature });
     router.push(`gallery/${address}`);
@@ -65,6 +66,47 @@ export default function Config() {
           </div>
           <Form.Control asChild>
             <TextArea defaultValue={accountData?.user?.description} />
+          </Form.Control>
+        </Form.Field>
+
+        <div className="flex flex-row justify-between">
+          <Form.Field name="primaryColor">
+            <div className="flex flex-col">
+              <Form.Label>Primary Color</Form.Label>
+            </div>
+            <Form.Control asChild>
+              <Input
+                type="color"
+                defaultValue={accountData?.user?.primaryColor}
+                className="h-12"
+              />
+            </Form.Control>
+          </Form.Field>
+
+          <Form.Field name="secondaryColor">
+            <div className="flex flex-col">
+              <Form.Label>Secondary Color</Form.Label>
+            </div>
+            <Form.Control asChild>
+              <Input
+                type="color"
+                defaultValue={accountData?.user?.secondaryColor}
+                className="h-12"
+              />
+            </Form.Control>
+          </Form.Field>
+        </div>
+
+        <Form.Field name="textColor">
+          <div className="flex flex-col">
+            <Form.Label>Text Color</Form.Label>
+          </div>
+          <Form.Control asChild>
+            <Input
+              type="color"
+              defaultValue={accountData?.user?.textColor}
+              className="h-12"
+            />
           </Form.Control>
         </Form.Field>
 

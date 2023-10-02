@@ -1,12 +1,19 @@
 import { INFT } from "@/utils/interfaces/nft";
+import { cn } from "@/utils/tailwind/classes";
 import { useEffect, useState } from "react";
 
 export default function Filters({
   nftData,
   setNfts,
+  primaryColor,
+  secondaryColor,
+  textColor,
 }: {
   nftData: { ownedNfts: INFT[] };
   setNfts: (nfts: INFT[]) => void;
+  primaryColor: string;
+  secondaryColor: string;
+  textColor: string;
 }) {
   const [collectionNames, setCollectionNames] = useState<string[]>([]);
   const [filterNames, setFilterNames] = useState<string[]>([]);
@@ -45,11 +52,22 @@ export default function Filters({
   };
 
   return (
-    <div className="flex flex-col w-auto p-4 sm:w-96 text-white">
-      <div className="rounded-t-lg bg-blue-300">
-        <h1 className="text-center text-lg font-bold p-1">Collections</h1>
+    <div className="flex flex-col w-auto p-4 sm:w-96">
+      <div
+        className="rounded-t-lg"
+        style={{ backgroundColor: secondaryColor || "#000000" }}
+      >
+        <h1
+          className="text-center text-lg font-bold p-1"
+          style={{ color: textColor || "white" }}
+        >
+          Collections
+        </h1>
       </div>
-      <div className="bg-blue-900 rounded-b-lg p-4 flex flex-col">
+      <div
+        className={`rounded-b-lg p-4 flex flex-col`}
+        style={{ backgroundColor: primaryColor || "#000000" }}
+      >
         {collectionNames?.map((name) => {
           return (
             <div>
@@ -59,7 +77,9 @@ export default function Filters({
                 value={name}
                 onChange={handleChange}
               />
-              <label className="ml-1">{name}</label>
+              <label className="ml-1" style={{ color: textColor || "white" }}>
+                {name}
+              </label>
             </div>
           );
         })}

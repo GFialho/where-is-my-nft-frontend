@@ -46,8 +46,19 @@ export default function Home({ params }: { params: { address: string } }) {
           <div>
             {nftData && (
               <div className="flex flex-col sm:flex-row justify-around  mt-10">
-                <Filters nftData={nftData} setNfts={setNfts} />
-                <Collection nftData={nfts} />
+                <Filters
+                  nftData={nftData}
+                  setNfts={setNfts}
+                  primaryColor={accountData?.user?.primaryColor}
+                  secondaryColor={accountData?.user?.secondaryColor}
+                  textColor={accountData?.user?.textColor}
+                />
+                <Collection
+                  nftData={nfts}
+                  primaryColor={accountData?.user?.primaryColor}
+                  secondaryColor={accountData?.user?.secondaryColor}
+                  textColor={accountData?.user?.textColor}
+                />
               </div>
             )}
             {!nftData && <span>No NFTs found.</span>}

@@ -58,6 +58,8 @@ export interface UpdateAccountInput {
   data: {
     nickname: string;
     description: string;
+    primaryColor: string;
+    secondaryColor: string;
   };
   signature: string;
 }

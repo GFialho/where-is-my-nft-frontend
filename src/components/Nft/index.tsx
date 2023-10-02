@@ -6,11 +6,24 @@ import discordIcon from "../../../assets/icons/discord.svg";
 import xIcon from "../../../assets/icons/x.svg";
 import websiteIcon from "../../../assets/icons/website.svg";
 
-export default function NFT({ data }: { data: INFT }) {
+export default function NFT({
+  data,
+  primaryColor,
+  secondaryColor,
+  textColor,
+}: {
+  data: INFT;
+  primaryColor: string;
+  secondaryColor: string;
+  textColor: string;
+}) {
   if (data.title === "Furlin") console.log(data);
   return (
-    <div className="flex flex-col justify-start p-4 w-86 h-86 text-white">
-      <div className="flex rounded-t-lg bg-white p-4 shadow-2xl	">
+    <div className="flex flex-col justify-start p-4 w-86 h-86">
+      <div
+        className="flex rounded-t-lg bg-white p-4 shadow-2xl"
+        style={{ backgroundColor: secondaryColor || "#000000" }}
+      >
         <a
           href={`https://opensea.io/assets/ethereum/${data.contract?.address}/${data.tokenId}`}
         >
@@ -37,33 +50,61 @@ export default function NFT({ data }: { data: INFT }) {
           />
         </a>
       </div>
-      <div className="flex flex-col bg-blue-900 rounded-b-lg p-2 shadow-2xl	">
-        <h1 className="text-center items-center justify-center text-lg font-bold mb-2 w-64 text-clip">
+      <div
+        className="flex flex-col rounded-b-lg p-2 shadow-2xl"
+        style={{ backgroundColor: primaryColor || "#000000" }}
+      >
+        <h1
+          className="text-center items-center justify-center text-lg font-bold mb-2 w-64 text-clip"
+          style={{ color: textColor || "white" }}
+        >
           {data.title}
         </h1>
 
         <div className="flex justify-between text-clip">
-          <h1 className="font-bold text-sm">Collection</h1>
+          <h1
+            className="font-bold text-sm"
+            style={{ color: textColor || "white" }}
+          >
+            Collection
+          </h1>
           <a
             href={`https://opensea.io/assets/ethereum/${data.contract?.address}/${data.tokenId}`}
             className="w-32 truncate  text-end"
           >
-            <span className="text-sm w-32 truncate">{data.contract?.name}</span>
+            <span
+              className="text-sm w-32 truncate"
+              style={{ color: textColor || "white" }}
+            >
+              {data.contract?.name}
+            </span>
           </a>
         </div>
 
         <div className="flex justify-between">
-          <h1 className="font-bold  text-sm">Contract</h1>
+          <h1
+            className="font-bold  text-sm"
+            style={{ color: textColor || "white" }}
+          >
+            Contract
+          </h1>
           <a href={`https://etherscan.io/address/${data.contract?.address}`}>
-            <span className="text-sm">{data.tokenType}</span>
+            <span className="text-sm" style={{ color: textColor || "white" }}>
+              {data.tokenType}
+            </span>
           </a>
         </div>
 
         {data.contract?.openSea && (
           <div className="flex flex-col">
             <div className="flex justify-between">
-              <h1 className="font-bold  text-sm">Floor price</h1>
-              <span className="text-sm">
+              <h1
+                className="font-bold  text-sm"
+                style={{ color: textColor || "white" }}
+              >
+                Floor price
+              </h1>
+              <span className="text-sm" style={{ color: textColor || "white" }}>
                 {data.contract.openSea.floorPrice}
               </span>
             </div>
