@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Gabriel Fialho NFT Gallery Challenge (Frontend)
 
-## Getting Started
+Frontend system of the nft gallery, a website where people can see NFTs from different users and customize their own collection. The technologies used are:
 
-First, run the development server:
+- Typescript as language
+- NextJs 13
+- Tailwind for styiling
+- Rainbowkit for authentication
+- Alchemy for web3 data
+- React Query for data fetching
+- AWS Amplify for hosting
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+This system is splitted into modules, each one with a specific function.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Pages
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Gallery
+   Page where people can see the NFT collection of a specific address.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+`https://main.d2ifhmggvcy4d7.amplifyapp.com/gallery/{address}`
 
-## Learn More
+2. Configuration
+   Page to customize how your collection will be shown to users, you need to connect your wallet to be able to customize, you can do it simply by cliking "Connect Wallet" button on top right of the page.
+   The configuration will be saved on the backend.
 
-To learn more about Next.js, take a look at the following resources:
+`https://main.d2ifhmggvcy4d7.amplifyapp.com/configuration`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## How to run
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+You need to first run the backend and then do the steps below:
 
-## Deploy on Vercel
+1. Install all dependencies:
+   `npm install`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2. Populate `.env` file with:
+   `ALCHEMY_API_KEY` - your Alchemy Api Key
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+`NEXT_PUBLIC_BASE_API_URL` - The url you are running the backend (`http://localhost:3000/dev`)
+
+3. Run the server:
+   `npm run dev`
