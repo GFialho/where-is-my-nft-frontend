@@ -3,9 +3,34 @@ import Button from "@/components/Button";
 import Input from "@/components/Input";
 import Menu from "@/components/Menu";
 import TextArea from "@/components/TextArea";
+import { useMutationUpdateAccount } from "@/mutations/updateAccount";
+import { useQueryGetAccount } from "@/queries/getAccount";
 import * as Form from "@radix-ui/react-form";
+import { useRouter } from "next/navigation";
+import { FormEvent } from "react";
+import { useAccount, useSignMessage } from "wagmi";
 
 export default function Config() {
+  const { signMessageAsync } = useSignMessage();
+
+  const { mutateAsync, isLoading: isMutationLoading } =
+    useMutationUpdateAccount();
+
+  const { address } = useAccount();
+
+  const { data: accountData } = useQueryGetAccount(address as string, {
+    enabled: !!address,
+  });
+
+  const router = useRouter();
+
+  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    const data = Object.fromEntries(new FormData(event.currentTarget));
+    const signature = await signMessageAsync({ message: JSON.stringify(data) });
+    await mutateAsync({ address, data, signature });
+    router.push(`gallery/${address}`);
+  };
+
   return (
     <div className="flex flex-col h-full items-center justify-start p-16 w-full">
       <Menu />
@@ -24,7 +49,11 @@ export default function Config() {
             </Form.Message>
           </div>
           <Form.Control asChild>
-            <Input type="text" required defaultValue={""} />
+            <Input
+              type="text"
+              required
+              defaultValue={accountData?.user?.nickname}
+            />
           </Form.Control>
         </Form.Field>
 
@@ -33,7 +62,7 @@ export default function Config() {
             <Form.Label>Description</Form.Label>
           </div>
           <Form.Control asChild>
-            <TextArea defaultValue={""} />
+            <TextArea defaultValue={accountData?.user?.description} />
           </Form.Control>
         </Form.Field>
 
@@ -42,8 +71,8 @@ export default function Config() {
             <Button
               style={{ marginTop: 10 }}
               color="primary"
-              //   disabled={isMutationLoading}
-              //   isLoading={isMutationLoading}
+              disabled={isMutationLoading}
+              isLoading={isMutationLoading}
             >
               Update
             </Button>
