@@ -27,6 +27,8 @@ export default function Filters({
           namesSet.add(nft.contract?.openSea?.collectionName);
       });
       setCollectionNames(Array.from(namesSet));
+
+      filterNfts(Array.from(namesSet));
     }
   }, [nftData]);
 

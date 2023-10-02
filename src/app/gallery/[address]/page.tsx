@@ -21,7 +21,7 @@ export default function Home({ params }: { params: { address: string } }) {
   } = useQueryGetNFTBalance({
     address: params.address,
   });
-  const [data, setData] = useState<any>([]);
+  const [data, setData] = useState<any>({ ownedNfts: [] });
 
   const { data: accountData, isLoading: isGetAccountLoading } =
     useQueryGetAccount(params.address as string, {
@@ -35,16 +35,18 @@ export default function Home({ params }: { params: { address: string } }) {
   useEffect(() => {
     if (!nftData) return;
 
-    const allPagesData: { ownedNfts: INFT[]; totalCount: number } = {
+    const allPagesData: { ownedNfts: INFT[] } = {
       ownedNfts: [],
-      totalCount: nftData?.pages?.[0]?.totalCount,
     };
 
     nftData?.pages?.forEach((page: any) => {
       allPagesData.ownedNfts.push(...page.ownedNfts);
     });
 
-    setData(allPagesData);
+    setData({
+      totalCount: nftData?.pages?.[0]?.totalCount,
+      ownedNfts: [...data.ownedNfts, ...allPagesData.ownedNfts],
+    });
   }, [nftData]);
 
   useEffect(() => {
