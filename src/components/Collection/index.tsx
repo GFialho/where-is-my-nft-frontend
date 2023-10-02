@@ -19,13 +19,14 @@ export default function Collection({
   return (
     <div className="flex flex-col justify-start w-full h-full">
       <div className="flex flex-wrap justify-start sm:w-[1040px]">
-        {nftData?.map((data: INFT) => {
+        {nftData?.map((data: INFT, index: number) => {
           return (
             <NFT
               data={data}
               primaryColor={primaryColor}
               secondaryColor={secondaryColor}
               textColor={textColor}
+              key={index}
             />
           );
         })}

@@ -68,9 +68,9 @@ export default function Filters({
         className={`rounded-b-lg p-4 flex flex-col`}
         style={{ backgroundColor: primaryColor || "#000000" }}
       >
-        {collectionNames?.map((name) => {
+        {collectionNames?.map((name, index: number) => {
           return (
-            <div>
+            <div key={index}>
               <input
                 type="checkbox"
                 className="p-1"
