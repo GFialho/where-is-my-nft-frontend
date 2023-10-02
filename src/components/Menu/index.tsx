@@ -19,7 +19,7 @@ export default function Menu() {
         <div className="flex justify-between shadow-md rounded-md p-2 w-96">
           <input
             type="text"
-            placeholder="Search"
+            placeholder="Search address"
             onChange={(event) => setSearchText(event.target.value)}
             onKeyDown={(event) => {
               if (event.key === "Enter") {

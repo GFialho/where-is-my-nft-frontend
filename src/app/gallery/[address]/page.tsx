@@ -8,11 +8,17 @@ import { useEffect, useState } from "react";
 import { INFT } from "@/utils/interfaces/nft";
 import Menu from "@/components/Menu";
 import { Spinner } from "@/components/Spinner";
+import { useQueryGetAccount } from "@/queries/getAccount";
 
 export default function Home({ params }: { params: { address: string } }) {
   const { data: nftData, isLoading } = useQueryGetNFTBalance({
     address: params.address,
   });
+
+  const { data: accountData, isLoading: isGetAccountLoading } =
+    useQueryGetAccount(params.address as string, {
+      enabled: !!params.address,
+    });
 
   const [nfts, setNfts] = useState<INFT[]>([]);
 
@@ -25,8 +31,15 @@ export default function Home({ params }: { params: { address: string } }) {
   return (
     <div className="flex flex-col h-full items-center justify-start p-16 w-full">
       <Menu />
-      <Banner />
-      <Header />
+
+      {!isGetAccountLoading && (
+        <Banner
+          nickname={accountData?.user?.nickname}
+          description={accountData?.user?.description}
+          address={params.address}
+        />
+      )}
+
       {isLoading && <Spinner />}
       {!isLoading && (
         <div>
