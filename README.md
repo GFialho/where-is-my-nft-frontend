@@ -23,6 +23,14 @@ Frontend system of the nft gallery, a website where people can see NFTs from dif
 
 `https://main.d2ifhmggvcy4d7.amplifyapp.com/configuration`
 
+Users can customize:
+
+1. The nickname
+2. Description of user's collection
+3. Primary color of gallery page
+4. Secondary color of gallery page
+5. Text color of gallery page
+
 ## How to run
 
 You need to first run the backend and then do the steps below:
