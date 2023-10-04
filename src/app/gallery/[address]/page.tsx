@@ -2,7 +2,6 @@
 import Filters from "@/components/Filters";
 import Collection from "@/components/Collection";
 import Banner from "@/components/Banner";
-import Header from "@/components/Header";
 import { useQueryGetNFTBalance } from "@/queries/getNFTBalance";
 import { useEffect, useState } from "react";
 import { INFT } from "@/utils/interfaces/nft";

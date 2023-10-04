@@ -1,5 +1,6 @@
+"use client";
+
 import { INFT } from "@/utils/interfaces/nft";
-import { cn } from "@/utils/tailwind/classes";
 import { useEffect, useState } from "react";
 
 export default function Filters({
