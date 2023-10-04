@@ -44,7 +44,7 @@ export default function Home({ params }: { params: { address: string } }) {
 
     setData({
       totalCount: nftData?.pages?.[0]?.totalCount,
-      ownedNfts: [...data.ownedNfts, ...allPagesData.ownedNfts],
+      ownedNfts: [...allPagesData.ownedNfts],
     });
   }, [nftData]);
 

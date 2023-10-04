@@ -12,8 +12,11 @@ export const useQueryGetNFTBalance = (
 ): any => {
   return useInfiniteQuery({
     queryKey: ["get-nft-balance"],
-    queryFn: ({ pageParam }) =>
-      alchemy.nft.getNftsForOwner(address, { pageKey: pageParam?.pageKey }),
+    queryFn: ({ pageParam }) => {
+      return alchemy.nft.getNftsForOwner(address, {
+        pageKey: pageParam,
+      });
+    },
     getNextPageParam: (lastPage: any) => lastPage.pageKey,
     ...options,
   });
