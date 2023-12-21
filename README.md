@@ -1,4 +1,4 @@
-# Gabriel Fialho NFT Gallery Challenge (Frontend)
+# Gabriel Fialho NFT Gallery (Frontend)
 
 Frontend system of the nft gallery, a website where people can see NFTs from different users and customize their own collection: https://main.d2ifhmggvcy4d7.amplifyapp.com/gallery/0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d. The technologies used are:
 
